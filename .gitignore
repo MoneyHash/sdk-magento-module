@@ -1,0 +1,9 @@
+src/bin
+src/dev
+src/generated
+src/lib
+src/phpserver
+src/pub
+src/setup
+src/var
+src/vendor
