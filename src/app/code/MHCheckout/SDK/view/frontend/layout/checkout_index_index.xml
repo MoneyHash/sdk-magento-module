@@ -21,37 +21,11 @@
                             <item name="children" xsi:type="array">
                                 <item name="steps" xsi:type="array">
                                     <item name="children" xsi:type="array">
-                                        <!-- This is the payment step -->
                                         <item name="billing-step" xsi:type="array">
                                             <item name="children" xsi:type="array">
+                                              <!-- This disables the entire payment methods component -->
                                                 <item name="payment" xsi:type="array">
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="renders" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <!--
-                                                                STEP 2: REGISTER OUR CUSTOM RENDERER
-                                                                This tells Magento that when it finds our payment method ('mhcheckout_sdk'),
-                                                                it should use our custom JS component to render it.
-                                                                -->
-                                                                <item name="mhcheckout-sdk-renderer" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">MHCheckout_SDK/js/view/payment/sdk-payment</item>
-                                                                    <item name="methods" xsi:type="array">
-                                                                        <item name="mhcheckout_sdk" xsi:type="array">
-                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
-                                                                        </item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                        <!--
-                                                        STEP 3: REMOVE OTHER PAYMENT METHODS
-                                                        As MoneyHash SDK handles ALL payment options, you can remove 
-                                                        the default Magento payment method list completely.
-                                                        -->
-                                                        <item name="payment-methods-load" xsi:type="array">
-                                                            <item name="component" xsi:type="string">MHCheckout_SDK/js/view/payment/sdk-payment</item>
-                                                        </item>
-                                                    </item>
+                                                  <item name="componentDisabled" xsi:type="boolean">true</item>
                                                 </item>
                                             </item>
                                         </item>
