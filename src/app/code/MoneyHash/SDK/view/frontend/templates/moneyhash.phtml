@@ -76,7 +76,7 @@
 
     <div id="intent-status" class="content hidden flex flex-col items-center">
       <h2 class="mt-4 flex justify-center">
-        <i id="intent-status-icon" data-feather="check-circle" class="w-18 h-18"></i>
+        <img id="intent-status-icon" src="" class="w-18 h-18"></img>
       </h2>
       <span id="intent-status-message" class="text-center"></span>
     </div>
@@ -443,13 +443,13 @@
         case "PROCESSED":
           intentStatusMessage.textContent = "Payment processed successfully!";
           intentStatusMessage.classList.add("text-green-500");
-          // intentStatusIcon.setAttribute("data-feather", "check-circle");
+          intentStatusIcon.setAttribute("src", "https://png.pngtree.com/png-clipart/20210321/original/pngtree-green-check-mark-icon-design-template-vector-png-image_6109371.jpg");
           // intentStatusIcon.classList.add("text-green-500");
           break;
         case "UNPROCESSED":
           intentStatusMessage.textContent = "Payment is failed.";
           intentStatusMessage.classList.add("text-red-500");
-          // intentStatusIcon.setAttribute("data-feather", "x-circle");
+          intentStatusIcon.setAttribute("src", "https://images.vexels.com/media/users/3/340644/isolated/preview/e582116e90ff33f47a38ba20aaf82ecc-red-x-in-a-circle.png");
           // intentStatusIcon.classList.add("text-red-500");
           break;
         default:

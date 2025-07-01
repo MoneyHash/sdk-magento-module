@@ -1,0 +1,80 @@
+<?php
+/**
+ * @var \MoneyHashStore\Clothes\Block\ProductList $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="products-wrapper">
+  <ol class="products list items product-items">
+    <?php foreach ($block->getProducts() as $product): ?>
+      <li class="item product product-item">
+        <div class="product-item-info">
+          <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="product-item-photo">
+            <?php
+            $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+              ->init($product, 'product_page_image_small')
+              ->setImageFile($product->getImage())
+              ->resize(240)
+              ->getUrl();
+            ?>
+            <img class="product-image-photo" src="<?= $escaper->escapeUrl($imageUrl) ?>"
+              alt="<?= $escaper->escapeHtml($product->getName()) ?>">
+          </a>
+          <div class="product-item-details">
+            <strong class="product-item-name">
+              <a class="product-item-link" href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                <?= $escaper->escapeHtml($product->getName()) ?>
+              </a>
+            </strong>
+            <?= $block->getProductPrice($product) ?>
+            <div class="product-item-actions">
+              <form data-role="tocart-form" action="<?= $escaper->escapeUrl($block->getAddToCartUrl($product)) ?>"
+                method="post">
+                <?= $block->getBlockHtml('formkey') ?>
+                <button type="submit" title="Add to Cart" class="action tocart primary">
+                  <span>Add to Cart</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </li>
+    <?php endforeach; ?>
+  </ol>
+</div>
+<style>
+  .products-wrapper {
+    margin: 20px 0;
+  }
+
+  .product-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .product-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .product-item-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .product-item-details {
+    margin-top: auto;
+  }
+
+  .product-image-photo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+</style>
