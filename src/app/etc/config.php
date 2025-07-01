@@ -377,6 +377,7 @@ return [
         'Magento_WishlistAnalytics' => 1,
         'Magento_WishlistGraphQl' => 1,
         'Magento_WishlistSampleData' => 1,
+        'MHCheckout_SDK' => 1,
         'MoneyHashStore_Clothes' => 1,
         'MoneyHash_SDK' => 1,
         'PayPal_Braintree' => 1,
