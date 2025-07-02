@@ -17,7 +17,12 @@
             <block class="Magento\Framework\View\Element\Template" name="mhcheckout.sdk.loader" template="MHCheckout_SDK::sdk_loader.phtml" after="checkout.root"/>
         </referenceContainer>
 
-        <referenceBlock name="checkout.root">
+       
+    </body>
+</page>
+
+<!-- 
+ <referenceBlock name="checkout.root">
           <arguments>
               <argument name="jsLayout" xsi:type="array">
                   <item name="components" xsi:type="array">
@@ -26,9 +31,9 @@
                               <item name="steps" xsi:type="array">
                                   <item name="children" xsi:type="array">
                                       <item name="billing-step" xsi:type="array">
-                                          <item name="children" xsi:type="array">
+                                          <item name="children" xsi:type="array"> -->
                                               <!-- This disables the entire payment methods component -->
-                                              <item name="payment" xsi:type="array">
+                                              <!-- <item name="payment" xsi:type="array">
                                                   <item name="componentDisabled" xsi:type="boolean">true</item>
                                               </item>
                                           </item>
@@ -40,6 +45,5 @@
                   </item>
               </argument>
           </arguments>
-        </referenceBlock>
-    </body>
-</page>
+        </referenceBlock> -->
+        
