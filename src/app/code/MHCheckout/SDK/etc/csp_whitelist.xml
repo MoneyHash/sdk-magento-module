@@ -12,5 +12,11 @@
                 <value id="jsdelivr" type="host">https://cdn.jsdelivr.net</value>
             </values>
         </policy>
+
+        <policy id="img-src">
+            <values>
+                <value id="moneyhash-cdn" type="host">https://cdn.moneyhash.io</value>
+            </values>
+        </policy>
     </policies>
 </csp_whitelist>
