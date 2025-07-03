@@ -11,6 +11,8 @@
         STEP 1: INJECT MONEYHASH SDK CDN
         -->
         <script src="https://cdn.jsdelivr.net/npm/@moneyhash/js-sdk@2.4.1/dist/headlessMoneyHash.iife.js" src_type="url"/>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" src_type="url"></script>
+
     </head>
     
     <body>
@@ -27,7 +29,6 @@
                                                 <item name="payment" xsi:type="array">
                                                     <item name="children" xsi:type="array">
                                                         <item name="renders" xsi:type="array">
-                                                            <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
                                                                 <item name="offline-payments" xsi:type="array">
                                                                     <item name="component" xsi:type="string">MoneyHash_CustomPayment/js/view/payment/custompayment</item>
