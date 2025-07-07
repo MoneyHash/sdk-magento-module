@@ -1,0 +1,182 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<style>
+    .form-input {
+        border: 1px solid #d1d5dc;
+        border-radius: 4px;
+    }
+</style>
+
+<p>Shipping Address: (Can be used while creating intent)</p>
+<pre data-bind="text: JSON.stringify(getShippingAddress(), null, 2)"></pre>
+
+<div
+    class="payment-method"
+    data-bind="css: {'_active': (getCode() == isChecked())}"
+>
+    <div class="flex flex-col items-center justify-center p-4">
+        <div
+            class="flex px-6 py-4 bg-white shadow-md rounded-lg flex-col w-full max-w-2xl"
+        >
+            <h1 class="text-center">MoneyHash SDK</h1>
+
+            <div id="intent-id" class="mh-content">
+                <label for="intent-id-input">Intent ID:</label>
+                <span class="text-gray-500 flex gap-1 mb-3">
+                    insert intent id created using
+                    <a
+                        href="https://docs.moneyhash.io/reference/payment-intent-v11"
+                        target="_blank"
+                        class="text-blue-600 underline"
+                    >
+                        MoneyHash API
+                    </a>
+                </span>
+                <input
+                    type="text"
+                    id="intent-id-input"
+                    class="w-full p-2 border border-gray-300 rounded"
+                    placeholder="Example: gEQlYKl"
+                />
+
+                <button
+                    id="load-intent-button"
+                    class="!mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer !flex items-center justify-center"
+                    data-bind="
+                        click: loadIntent
+                        "
+                >
+                    Load Intent
+                </button>
+            </div>
+
+            <div id="methods" class="mh-content hidden">
+                <h2 class="text-lg font-bold mb-2">Select Payment Method:</h2>
+                <div
+                    id="express-methods"
+                    class="flex flex-col items-center justify-center border border-gray-300 rounded-lg p-2 mb-4"
+                >
+                    <h3 class="text-md font-semibold mb-2">Express checkout</h3>
+                    <div
+                        class="self-stretch"
+                        data-bind="foreach: getExpressMethods()"
+                    >
+                        <button
+                            style="
+                                cursor: pointer;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                padding: 0.5rem;
+                                border: 1px solid #d1d5db;
+                                border-radius: 0.25rem;
+                            "
+                            data-bind="
+                                click: $parent.selectMethodHandler,
+                                html: '<img style=\'margin-right: 0.5rem; height: 1.5rem;\' src=\'' + icons[0] + '\' alt=\'' + title + '\' /><span>' + title + '</span>'
+                            "
+                        ></button>
+                    </div>
+                </div>
+                <div
+                    id="payment-methods"
+                    class="flex flex-col gap-2"
+                    data-bind="foreach: getPaymentMethods()"
+                >
+                    <button
+                        style="
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            width: 100%;
+                            padding: 0.5rem;
+                            border: 1px solid #d1d5db;
+                            border-radius: 0.25rem;
+                        "
+                        data-bind="
+                                click: $parent.selectMethodHandler,
+                                html: '<img style=\'margin-right: 0.5rem; height: 1.5rem;\' src=\'' + icons[0] + '\' alt=\'' + title + '\' /><span>' + title + '</span>'
+                            "
+                    ></button>
+                </div>
+            </div>
+
+            <div id="card-form" class="mh-content hidden">
+                <div class="grid grid-cols-2 gap-1">
+                    <div class="col-span-full">
+                        <div id="card-holder-name" class="form-input"></div>
+                        <div
+                            id="card-holder-name-error"
+                            class="text-red-500 invisible"
+                        >
+                            error
+                        </div>
+                    </div>
+
+                    <div class="col-span-full">
+                        <div id="card-number" class="form-input"></div>
+                        <div
+                            id="card-number-error"
+                            class="text-red-500 invisible"
+                        >
+                            error
+                        </div>
+                    </div>
+
+                    <div>
+                        <div id="card-expiry-month" class="form-input"></div>
+                        <div
+                            id="card-expiry-month-error"
+                            class="text-red-500 invisible"
+                        >
+                            error
+                        </div>
+                    </div>
+
+                    <div>
+                        <div id="card-expiry-year" class="form-input"></div>
+                        <div
+                            id="card-expiry-year-error"
+                            class="text-red-500 invisible"
+                        >
+                            error
+                        </div>
+                    </div>
+
+                    <div class="col-span-full">
+                        <div id="card-cvv" class="form-input"></div>
+                        <div id="card-cvv-error" class="text-red-500 invisible">
+                            error
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    id="submit-button"
+                    class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer w-full !flex items-center justify-center"
+                    data-bind="
+                        click: submitForm
+                        "
+                >
+                    Submit
+                </button>
+            </div>
+
+            <div
+                id="intent-status"
+                class="mh-content hidden flex flex-col items-center"
+            >
+                <h2 class="mt-4 flex justify-center">
+                    <img id="intent-status-icon" src="" class="w-18 h-18" />
+                </h2>
+                <span id="intent-status-message" class="text-center"></span>
+            </div>
+        </div>
+    </div>
+</div>
