@@ -5,5 +5,9 @@
         <route id="public_key_fetcher" frontName="public_key_fetcher">
             <module name="MoneyHash_SDK"/>
         </route>
+
+        <route id="create_intent" frontName="create_intent">
+            <module name="MoneyHash_SDK" />
+        </route>
     </router>
 </config>

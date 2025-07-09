@@ -100,6 +100,29 @@ define([
         });
     },
 
+    createIntent: async function () {
+      const serviceUrl = urlBuilder.build("create_intent/api/createintent");
+
+      try {
+        const response = await storage.post(
+          serviceUrl,
+          JSON.stringify({
+            amount: 1000,
+            amount_currency: "SAR",
+            webhook_url: "https://example.com/webhook",
+            operation: "purchase",
+          })
+        );
+
+        const { data } = response;
+        const intent = data.data;
+
+        this.intentDetails = intent;
+      } catch (error) {
+        console.error("Error creating intent:", error);
+      }
+    },
+
     loadMethods: async function () {
       try {
         fullScreenLoader.startLoader();
@@ -209,9 +232,7 @@ define([
       console.log(`Selected method: ${id}`);
 
       if (!this.intentDetails) {
-        // TODO: Create intent here
-        console.error("Intent details are not available.");
-        return;
+        await this.createIntent();
       }
 
       try {

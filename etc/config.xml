@@ -8,6 +8,7 @@
                 <model>MoneyHash\SDK\Model\MoneyHashPayment</model>
                 <order_status>pending</order_status>
                 <title>MoneyHash Payment</title>
+                <moneyhash_api_endpoint>https://web.moneyhash.io/api/v1.1/</moneyhash_api_endpoint>
                 <allowspecific>0</allowspecific>
                 <group>offline</group>
             </moneyhashpayment>
