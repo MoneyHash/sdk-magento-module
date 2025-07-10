@@ -28,6 +28,7 @@ php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 php bin/magento setup:static-content:deploy
 php bin/magento cache:clean
+php bin/magento cache:flush
 ```
 
 ---
@@ -38,7 +39,12 @@ php bin/magento cache:clean
 2. Go to **Stores** → **Configuration** → **Sales** → **Payment Methods**.
 3. Expand **MoneyHash Payment**.
 4. Select Enabled **Yes**.
-5. Save Config and flush caches.
+5. Add MoneyHash API endpoint URL that you can get from our docs [here](https://docs.moneyhash.io/reference/payment-intent-v11).
+6. Add your account API key that is used for authenticating calls to MoneyHash endpoint.
+7. Add your public API key that is used in Web SDK integration.
+8. Save Config and flush caches.
+
+> **_NOTE:_** API key and Public API key will be found in MoneyHash dashboard under _Integrations_ > _Account API Keys_.
 
 ---
 
