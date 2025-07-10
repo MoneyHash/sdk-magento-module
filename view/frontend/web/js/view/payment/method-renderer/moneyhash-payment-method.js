@@ -57,6 +57,7 @@ define([
       this.state = null;
       this.stateDetails = null;
       this.intentDetails = null;
+      this.selectedMethod = null;
 
       this.selectMethodHandler = this.selectMethodHandler.bind(this);
 
@@ -171,6 +172,7 @@ define([
       this.state = response.state;
       this.stateDetails = response.stateDetails;
       this.intentDetails = response.intent;
+      this.selectedMethod = response.selectedMethod;
 
       this.renderStateAction();
     },
@@ -316,6 +318,21 @@ define([
       }
 
       this.manageShownContent("intent-status");
+    },
+
+    getData: function () {
+      const data = this._super();
+
+      const additional_data = {
+        moneyhash_pay_data: JSON.stringify({
+          selectedMethod: this.selectedMethod,
+          intentId: this.intentDetails?.id,
+        }),
+      };
+
+      data.additional_data = additional_data || {};
+
+      return data;
     },
 
     // MoneyHash SDK methods

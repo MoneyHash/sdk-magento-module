@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var \MoneyHash\SDK\Block\Info\MoneyHashPayment $block
+ */
+$str_pay_data = $block->getMoneyhashPayData("moneyhash_pay_data");
+$pay_data = json_decode($str_pay_data, true);
+?>
+<strong><?= $block->escapeHtml($block->getMethod()->getTitle()) ?></strong>
+
+<dl>
+  <dt>Selected Method:</dt>
+  <dd><?= $block->escapeHtml($pay_data['selectedMethod'] ?? '') ?></dd>
+</dl>

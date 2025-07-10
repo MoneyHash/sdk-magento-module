@@ -38,7 +38,7 @@ class MoneyHashPayment extends AbstractMethod
    *
    * @var string
    */
-  protected $_infoBlockType = \Magento\Payment\Block\Info\Instructions::class;
+  protected $_infoBlockType = \MoneyHash\SDK\Block\Info\MoneyHashPayment::class;
 
   /**
    * Availability option
