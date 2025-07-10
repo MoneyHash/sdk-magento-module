@@ -103,15 +103,55 @@ define([
 
     createIntent: async function () {
       const serviceUrl = urlBuilder.build("create_intent/api/createintent");
+      const orderItems = quote.getItems().map((item) => ({
+        name: item.name,
+        description: item.description || item.name,
+        amount: Number(item.price),
+        quantity: item.qty,
+      }));
+      const shipping = quote.shippingAddress();
+      const shippingMethod = quote.shippingMethod();
+      const billing = quote.billingAddress();
 
       try {
+        fullScreenLoader.startLoader();
+
         const response = await storage.post(
           serviceUrl,
           JSON.stringify({
-            amount: 1000,
-            amount_currency: "SAR",
-            webhook_url: "https://example.com/webhook",
-            operation: "purchase",
+            amount: orderItems.reduce((sum, item) => sum + item.amount * item.quantity, 0),
+            amount_currency: "SAR", // replace with currency driven from magento info using `quote.totals()?.base_currency_code`
+            operation: "purchase", // or "authorize"
+            webhook_url: "https://example.webhook.url", // replace with your actual webhook URL
+
+            billing_data: {
+              first_name: billing.firstname,
+              last_name: billing.lastname,
+              email: billing.email,
+              phone_number: billing.telephone,
+              address: billing.getAddressInline(),
+              city: billing.city,
+              state: billing.region,
+              postal_code: billing.postcode,
+            },
+            shipping_data: {
+              address: shipping.getAddressInline(),
+              city: shipping.city,
+              state: shipping.region,
+              postal_code: shipping.postcode,
+              first_name: shipping.firstname,
+              last_name: shipping.lastname,
+              phone_number: shipping.telephone,
+              shipping_method: shippingMethod.method_code,
+              email: shipping.email,
+              apartment: "803",
+              building: "8028",
+              description: "Second building",
+              country: shipping.countryId,
+              street: shipping.street.join(", "),
+              floor: 1,
+            },
+            product_items: orderItems,
           })
         );
 
@@ -121,6 +161,8 @@ define([
         this.intentDetails = intent;
       } catch (error) {
         console.error("Error creating intent:", error);
+      } finally {
+        fullScreenLoader.stopLoader();
       }
     },
 
